@@ -1,55 +1,119 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>YouTube API Uploads</title>
-    <link rel="stylesheet" href="css/style.css">
-  </head>
-  <body>
-    <span id="signinButton" class="pre-sign-in">
-      <span
-          class="g-signin"
-          data-callback="oauth2Callback"
-          data-clientid="105596964893-m5cbn2ktsplrbgvh9ne9geteh5albbnj.apps.googleusercontent.com"
-          data-cookiepolicy="single_host_origin"
-          data-scope="https://www.googleapis.com/auth/youtube.readonly https://www.googleapis.com/auth/youtube.upload">
-      </span>
-    </span>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" type="text/css" href="css/style.css"/>
+  <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/p5.js/0.2.10/p5.min.js"></script>
+  <script language="javascript" type="text/javascript" src="js/whammy.js"></script>
+  <script language="javascript" type="text/javascript" src="js/headtrackr.js"></script>
+  <script language="javascript" type="text/javascript" src="js/popcorn.js"></script>
+  <script language="javascript" type="text/javascript" src="js/buzz.js"></script>
+  <title>VDO testing</title>
+</head>
+<body>
 
-    <div class="post-sign-in">
-      <div>
-        <img id="channel-thumbnail">
-        <span id="channel-name"></span>
-      </div>
+  <!--Insert VDO5: cow -->
+  <video id="video5">
+    <source src="media/vdo/cow.mp4">
+    </video>
 
-      <form id="upload-form" action="/upload" method="POST">
-        <div>
-          <label for="title">Title:</label>
-          <input id="title" type="text" value="Default Title">
-        </div>
-        <div>
-          <label for="description">Description:</label>
-          <textarea id="description">Default description.</textarea>
-        </div>
-        <div>
-          <input id="file" type="file">
-        </div>
-        <input id="submit" type="submit" value="Upload">
-      </form>
+    <!--Insert VDO4: corn -->
+    <video id="video4">
+      <source src="media/vdo/corn.mp4">
+      </video>
 
-      <div class="during-upload">
-        <p><span id="percent-transferred"></span>% done (<span id="bytes-transferred"></span>/<span id="total-bytes"></span> bytes)</p>
-        <progress id="upload-progress" max="1" value="0"></progress>
-      </div>
+      <!--Insert VDO3: lady -->
+      <video id="video3">
+        <source src="media/vdo/lady.mp4">
+        </video>
 
-      <div class="post-upload">
-        <p>Uploaded video with id <span id="video-id"></span>. Polling for status...</p>
-        <ul id="post-upload-status"></ul>
-        <div id="player"></div>
-      </div>
-    </div>
+        <!--Insert VDO2: man -->
+        <video id="video2">
+          <source src="media/vdo/man.mp4">
+          </video>
 
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-    <script src="js/main.js"></script>
-  </body>
+          <!--Insert VDO1: countdown -->
+          <video id="video1">
+            <source src="media/vdo/countdown.mov">
+            </video>
+
+            <!--Insert Webcam -->
+            <canvas id="inputCanvas" style="display:none"></canvas>
+            <video id="inputVideo" autoplay loop style="display:none"></video>
+
+            <!--Insert P5 animations -->
+            <canvas id="p5canvas"></canvas>
+
+            <!--Save Button -->
+            <div id="record">Start Recording</div>      
+            
+          </body>
+          <script type="text/javascript" src="js/main.js"></script>
+          <script type="text/javascript" src="js/drawTransition.js"></script>
+          <script type="text/javascript" src="js/drawDots.js"></script>
+          <script type="text/javascript" src="js/drawRainbowCircle.js"></script>
+          <script>
+     //Recording
+     var frames = [];
+     var context;
+     var recording = false;
+     var cnv = document.getElementById('p5canvas');
+     var recordingID = null;
+
+
+      //Declare a record button
+      //First event... click to start recording
+      //Start putting images in a canvas and create a data url
+      //Second event... click to stop recording
+      //Use Whammy.js to draw images frame by frame and create a blob 
+
+      var recordButton = document.getElementById('record');
+      var audio = document.getElementById("audio_preview");
+      recordButton.addEventListener('click', 
+        function(){
+          if (recording == false) {
+
+            recording = true;
+            console.log("Start Recording!");
+
+            function drawVideoFrame(time) {
+              recordingID = requestAnimationFrame(drawVideoFrame);
+              var url = cnv.toDataURL('image/webp', 1);
+              frames.push(url);
+            }
+            recordingID = requestAnimationFrame(drawVideoFrame);
+            //console.log(url); 
+          } else {
+            recording = false;
+            cancelAnimationFrame(recordingID);
+
+            console.log("Stop Recording!");
+            var webmBlob = Whammy.fromImageArray(frames, 1000 / 60);
+            var video = document.createElement('video');
+            video.setAttribute("id", "savedVideo");
+            video.src = window.URL.createObjectURL(webmBlob);
+            document.body.appendChild(video);
+
+            var downloadLink = document.createElement('a');
+            downloadLink.download = 'capture.webm';
+            downloadLink.textContent = '[ DOWNLOAD VDO ]';
+            downloadLink.title = 'Download your .webm video';
+            downloadLink.href = window.URL.createObjectURL(webmBlob);
+            var p = document.createElement('p');
+            p.id="videodownload";
+            p.appendChild(downloadLink);
+            document.body.appendChild(p); 
+          }
+        }, false);
+</script>
 </html>
+
+
+
+
+
+
+
+
+

@@ -1,37 +1,82 @@
-body {
-  font-family: "Open Sans", sans-serif;
-  font-size: 1.5em;
+body
+{
+	background: white;
+	background-size: 800px;
+	background-repeat: no-repeat;
 }
 
-.post-sign-in {
-  display: none;
+#video1{
+	position: absolute;
+	width:601px;
+	height:412px;
+	margin-left: 258px;
+    margin-top: 173px;
+    background-color: black;
+	z-index: 1;
+	display: none;
 }
 
-.during-upload {
-  display: none;
+#video2{
+	position: absolute;
+	width:601px;
+	height:412px;
+	margin-left: 258px;
+    margin-top: 173px;
+    background-color: black;
+	z-index: 1;
+	display: none;
 }
 
-.post-upload {
-  display: none;
+#video3{
+	position: absolute;
+	width:601px;
+	height:412px;
+	margin-left: 258px;
+    margin-top: 173px;
+    background-color: black;
+	z-index: 1;
+	display: none;
 }
 
-#channel-name {
-  font-size: 60px;
-  margin-left: 10px;
+#video4{
+	position: absolute;
+	width:601px;
+	height:412px;
+	margin-left: 258px;
+    margin-top: 173px;
+    background-color: black;
+	z-index: 1;
+	display: none;
 }
 
-label {
-  display: block;
+#video5{
+	position: absolute;
+	width:601px;
+	height:412px;
+	margin-left: 258px;
+    margin-top: 173px;
+    background-color: black;
+	z-index: 1;
+	display: none;
 }
 
-input[type="text"], textarea, progress {
-  font-size: 0.75em;
-  width: 15em;
-  margin-bottom: 1em;
-  padding: 0.5em;
-  font-family: "Open Sans", sans-serif;
+#record{
+  z-index: 1;
+  position: absolute;
+  bottom: 300px;
+  right: 0;
+  background-color: gray;
 }
 
-textarea {
-  height: 7em;
+#savedVideo{
+  position: absolute;
+  width: 100px;
+  bottom: 0;
+  right: 0;
+}
+
+#videodownload{
+  position: absolute;
+  bottom: 500px;
+  right: 0;
 }
