@@ -146,7 +146,7 @@ sketch.preload = function() {
       //drawFace() is a callback for when facetracker finds the face
       document.addEventListener('facetrackingEvent', 
         function (event) {  
-          drawFace(event.x, event.y, 300, 300);
+          drawFace(event.x, event.y, event.w, event.h);
         });
 
       //Set up for circle
@@ -179,7 +179,6 @@ sketch.preload = function() {
       setTimeout(function() {
         pop2.load();
         pop2.play();
-        console.log("3");
       }, 17300);
 
       //lady
@@ -246,7 +245,7 @@ sketch.draw = function() {
 
       if(showCow) { 
         sketch.fill(255,0,0);
-        sketch.image(cow, x+300, y+180, 300, 300);
+        sketch.image(cow, x+300, y+180, w, h);
       }
 
       if (fillDots) {
